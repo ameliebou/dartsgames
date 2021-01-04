@@ -5,7 +5,7 @@
   <%= simple_form_for @game do |f| %>
     <%= f.input :sets %>
     <%= f.input :legs %>
-    <%= f.input :type, collection: Game.types %>
+    <%= f.input :game_type, collection: Game.game_types %>
     <%= f.button :submit, class: "btn-primary" %>
   <% end %>
 </div>

@@ -6,7 +6,7 @@ class Game < ApplicationRecord
 
   private
 
-  def self.types
+  def self.game_types
     [101, 301, 501, 701, 1001]
   end
 
