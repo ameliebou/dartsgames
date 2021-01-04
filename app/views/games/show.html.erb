@@ -4,6 +4,9 @@
   <h3>Game info</h3>
   <p>ID: <%= @game.id %></p>
   <p>Password: <%= @game.password %></p>
+  <p>Game Type: <%= @game.game_type %></p>
+
+  <h3>Players</h3>
 
   <% @players.each do |player| %>
     <p><%= player.name %></p>

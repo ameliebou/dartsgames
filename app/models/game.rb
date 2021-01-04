@@ -4,6 +4,8 @@ class Game < ApplicationRecord
   has_many :players
   before_create :set_password
 
+  validates :game_type, presence: true
+
   private
 
   def self.game_types

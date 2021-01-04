@@ -3,21 +3,21 @@
 
   <h2>Create your game</h2>
   <%= simple_form_for @game do |f| %>
-    <%= f.input :sets %>
-    <%= f.input :legs %>
-    <%= f.input :game_type, collection: Game.game_types %>
+    <%= f.input :sets, placeholder: 'Enter number of sets' %>
+    <%= f.input :legs, placeholder: 'Enter number of legs' %>
+    <%= f.input :game_type, as: :radio_buttons, collection: Game.game_types, wrapper: :vertical_collection_inline %>
     <h5>Players:</h5>
     <%= f.simple_fields_for :player_1 do |form| %>
-      <%= form.input :name, label: 'Player 1' %>
+      <%= form.input :name, label: 'Player 1', placeholder: 'Enter name' %>
     <% end %>
     <%= f.simple_fields_for :player_2 do |form| %>
-      <%= form.input :name, label: 'Player 2' %>
+      <%= form.input :name, label: 'Player 2', placeholder: 'Enter name' %>
     <% end %>
     <%= f.simple_fields_for :player_3 do |form| %>
-      <%= form.input :name, label: 'Player 3' %>
+      <%= form.input :name, label: 'Player 3', placeholder: 'Enter name' %>
     <% end %>
     <%= f.simple_fields_for :player_4 do |form| %>
-      <%= form.input :name, label: 'Player 4' %>
+      <%= form.input :name, label: 'Player 4', placeholder: 'Enter name' %>
     <% end %>
     <%= f.button :submit, class: "btn-primary" %>
   <% end %>
