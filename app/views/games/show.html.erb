@@ -21,7 +21,7 @@
         </div>
         <div class="scores-container">
           <% player.scores.each do |score| %>
-            <p><%= score.score %></p>
+            <p data-score="<%= score.score %>"><%= score.score %></p>
           <% end %>
         </div>
         <%= simple_form_for [player, @score], remote: true do |f| %>

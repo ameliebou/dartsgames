@@ -17,5 +17,8 @@ require("channels")
 // const imagePath = (name) => images(name, true)
 
 import 'bootstrap';
+import { initCalcLegs } from '../components/initCalcLegs'
 
-document.addEventListener('turbolinks:load', () => {});
+document.addEventListener('turbolinks:load', () => {
+  initCalcLegs();
+});
