@@ -18,4 +18,4 @@ require("channels")
 
 import 'bootstrap';
 
-document.addEventListener('turbolinks:load', () => {}
+document.addEventListener('turbolinks:load', () => {});
