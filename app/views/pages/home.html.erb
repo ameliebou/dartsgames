@@ -1,3 +1,11 @@
 <div class="container">
   <h1>Welcome to Darts Games</h1>
+
+  <h2>Pick your game</h2>
+  <%= simple_form_for @game do |f| %>
+    <%= f.input :sets %>
+    <%= f.input :legs %>
+    <%= f.input :type, collection: Game.types %>
+    <%= f.button :submit, class: "btn-primary" %>
+  <% end %>
 </div>
