@@ -10,8 +10,14 @@
     <% @players.each_with_index do |player, i| %>
       <div class="player-container">
         <p><%= player.name %></p>
+        Legs
+        <div id="leg-<%= i + 1 %>" class="legs">0</div>
+
         <div id="score-<%= i + 1 %>" class="score">
           <p><%= @game.game_type - player.scores.map{|s| s.score}.sum %></p>
+          <% if @game.game_type - player.scores.map{|s| s.score}.sum == 0 %>
+            <% Score.destroy_all %>
+          <% end %>
         </div>
         <div class="scores-container">
           <% player.scores.each do |score| %>
