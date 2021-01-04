@@ -7,10 +7,15 @@
 
   <h3>Game</h3>
   <div class="game-container d-flex justify-content-between text-center">
-    <% @players.each do |player| %>
+    <% @players.each_with_index do |player, i| %>
       <div class="player-container">
         <p><%= player.name %></p>
-        <%= @game.game_type %>
+        <div id="score-<%= i + 1 %>">
+          <%= @game.game_type - player.scores.map{|s| s.score}.sum %>
+        </div>
+        <%= simple_form_for [player, @score], remote: true do |f| %>
+          <%= f.input :score, label: false, placeholder: 'Enter score' %>
+        <% end %>
       </div>
     <% end %>
   </div>
