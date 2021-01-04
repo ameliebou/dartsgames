@@ -10,8 +10,13 @@
     <% @players.each_with_index do |player, i| %>
       <div class="player-container">
         <p><%= player.name %></p>
-        <div id="score-<%= i + 1 %>">
-          <%= @game.game_type - player.scores.map{|s| s.score}.sum %>
+        <div id="score-<%= i + 1 %>" class="score">
+          <p><%= @game.game_type - player.scores.map{|s| s.score}.sum %></p>
+        </div>
+        <div class="scores-container">
+          <% player.scores.each do |score| %>
+            <p><%= score.score %></p>
+          <% end %>
         </div>
         <%= simple_form_for [player, @score], remote: true do |f| %>
           <%= f.input :score, label: false, placeholder: 'Enter score' %>
