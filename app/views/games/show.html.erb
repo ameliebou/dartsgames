@@ -4,11 +4,14 @@
   <h3>Game info</h3>
   <p>ID: <%= @game.id %></p>
   <p>Password: <%= @game.password %></p>
-  <p>Game Type: <%= @game.game_type %></p>
 
-  <h3>Players</h3>
-
-  <% @players.each do |player| %>
-    <p><%= player.name %></p>
-  <% end %>
+  <h3>Game</h3>
+  <div class="game-container d-flex justify-content-between text-center">
+    <% @players.each do |player| %>
+      <div class="player-container">
+        <p><%= player.name %></p>
+        <%= @game.game_type %>
+      </div>
+    <% end %>
+  </div>
 </div>
