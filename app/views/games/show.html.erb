@@ -5,6 +5,11 @@
     <h3>Game info</h3>
     <p>ID: <%= @game.id %></p>
     <p>Password: <%= @game.password %></p>
+    <% if @game.sets.nil? %>
+      <p>Best of <%= @game.legs %> legs</p>
+    <% else %>
+      <p>Best of <%= @game.legs %> legs - Best of <%= @game.sets %> sets</p>
+    <% end %>
   </div>
 
   <h3 class="mt-3">Game</h3>
