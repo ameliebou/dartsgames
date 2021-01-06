@@ -6,28 +6,36 @@
   <p>Password: <%= @game.password %></p>
 
   <h3>Game</h3>
-  <div class="game-container d-flex justify-content-between text-center">
-    <% @players.each_with_index do |player, i| %>
-      <div class="player-container">
-        <p><%= player.name %></p>
-        Legs
-        <div id="leg-<%= i + 1 %>" class="legs">0</div>
+  <% if @game.winner %>
+    <div class="winner-container">
+      <h4><%= @game.winner.player.name %> has won!!!</h4>
+    </div>
+  <% else %>
+    <div class="game-container d-flex justify-content-between text-center">
+      <% @players.each_with_index do |player, i| %>
+        <div class="player-container">
+          <p><%= player.name %></p>
+          Legs
+          <div id="leg-<%= i + 1 %>" class="legs">
+            <%= player.won_legs.count %>
+          </div>
 
-        <div id="score-<%= i + 1 %>" class="score">
-          <p><%= @game.game_type - player.scores.map{|s| s.score}.sum %></p>
-          <% if @game.game_type - player.scores.map{|s| s.score}.sum == 0 %>
-            <% Score.destroy_all %>
+          <div data-id="<%= i + 1 %>" class="score">
+            <p><%= @game.game_type - player.scores.map{|s| s.score}.sum %></p>
+            <% if @game.game_type - player.scores.map{|s| s.score}.sum == 0 %>
+              <% @game.win_leg(player) %>
+            <% end %>
+          </div>
+          <div class="scores-container">
+            <% player.scores.each do |score| %>
+              <p data-score="<%= score.score %>"><%= score.score %></p>
+            <% end %>
+          </div>
+          <%= simple_form_for [player, @score], remote: true do |f| %>
+            <%= f.input :score, label: false, placeholder: 'Enter score' %>
           <% end %>
         </div>
-        <div class="scores-container">
-          <% player.scores.each do |score| %>
-            <p data-score="<%= score.score %>"><%= score.score %></p>
-          <% end %>
-        </div>
-        <%= simple_form_for [player, @score], remote: true do |f| %>
-          <%= f.input :score, label: false, placeholder: 'Enter score' %>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
