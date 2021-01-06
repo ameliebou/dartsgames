@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_04_150233) do
+ActiveRecord::Schema.define(version: 2021_01_06_120833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2021_01_04_150233) do
     t.bigint "game_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "average", default: 0.0
     t.index ["game_id"], name: "index_players_on_game_id"
   end
 
@@ -40,6 +41,28 @@ ActiveRecord::Schema.define(version: 2021_01_04_150233) do
     t.index ["player_id"], name: "index_scores_on_player_id"
   end
 
+  create_table "won_legs", force: :cascade do |t|
+    t.bigint "player_id", null: false
+    t.bigint "game_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_won_legs_on_game_id"
+    t.index ["player_id"], name: "index_won_legs_on_player_id"
+  end
+
+  create_table "won_sets", force: :cascade do |t|
+    t.bigint "player_id", null: false
+    t.bigint "game_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_won_sets_on_game_id"
+    t.index ["player_id"], name: "index_won_sets_on_player_id"
+  end
+
   add_foreign_key "players", "games"
   add_foreign_key "scores", "players"
+  add_foreign_key "won_legs", "games"
+  add_foreign_key "won_legs", "players"
+  add_foreign_key "won_sets", "games"
+  add_foreign_key "won_sets", "players"
 end
