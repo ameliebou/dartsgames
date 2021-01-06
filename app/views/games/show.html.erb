@@ -1,23 +1,39 @@
 <div class="container">
-  <h1>Let's play!</h1>
+  <h1 class="text-center mt-3">Let's play!</h1>
 
-  <h3>Game info</h3>
-  <p>ID: <%= @game.id %></p>
-  <p>Password: <%= @game.password %></p>
+  <div class="game-info border-bottom">
+    <h3>Game info</h3>
+    <p>ID: <%= @game.id %></p>
+    <p>Password: <%= @game.password %></p>
+  </div>
 
-  <h3>Game</h3>
+  <h3 class="mt-3">Game</h3>
   <% if @game.winner %>
-    <div class="winner-container">
-      <h4><%= @game.winner.player.name %> has won!!!</h4>
+    <div class="winner-container text-center">
+      <h4><%= @game.winner.player.name %> has won 🎉</h4>
     </div>
   <% else %>
     <div class="game-container d-flex justify-content-between text-center">
       <% @players.each_with_index do |player, i| %>
         <div class="player-container">
-          <p><%= player.name %></p>
-          Legs
-          <div id="leg-<%= i + 1 %>" class="legs">
-            <%= player.won_legs.count %>
+          <div class="player-info">
+            <div class="player-name">
+              <%= player.name %>
+            </div>
+            <% unless @game.sets.nil? %>
+              <div class="player-sets">
+                Sets
+                <div id="set-<%= i + 1 %>" class="sets">
+                  <%= player.won_sets.count %>
+                </div>
+              </div>
+            <% end %>
+            <div class="player-legs">
+              Legs
+              <div id="leg-<%= i + 1 %>" class="legs">
+                <%= player.won_legs.count %>
+              </div>
+            </div>
           </div>
 
           <div data-id="<%= i + 1 %>" class="score">
