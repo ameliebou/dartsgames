@@ -13,9 +13,9 @@ class Game < ApplicationRecord
   def win_leg(player)
     WonLeg.create(player: player, game: self)
     Score.destroy_all
-    if player.won_legs.count == legs && sets.nil?
+    if player.won_legs.count > (legs / players.count.to_f) && sets.nil?
       create_winner(player)
-    elsif player.won_legs == legs
+    elsif player.won_legs.count > (legs / players.count.to_f)
       win_set(player)
     end
   end
@@ -32,7 +32,8 @@ class Game < ApplicationRecord
 
   def win_set(player)
     WonSet.create(player: player, game: self)
-    create_winner(player) if player.won_sets == sets
+    won_legs.destroy_all
+    create_winner(player) if player.won_sets.count > (sets / players.count.to_f)
   end
 
   def create_winner(player)
